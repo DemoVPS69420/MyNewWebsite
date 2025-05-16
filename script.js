@@ -8,10 +8,42 @@ document.addEventListener('DOMContentLoaded', function() {
         element.style.opacity = '1';
     });
 
+    // Hide the email initially and replace with a click prompt
+    const emailElement = document.querySelector('.contact p');
+    const originalEmail = emailElement.getAttribute('data-text');
+    emailElement.textContent = "Click to reveal email";
+    emailElement.classList.add('hidden-email');
+    
+    // Add click event to reveal email
+    emailElement.addEventListener('click', function() {
+        if (emailElement.classList.contains('hidden-email')) {
+            emailElement.classList.remove('hidden-email');
+            
+            // Clear the current text
+            emailElement.textContent = '';
+            
+            // Create a typing animation specifically for the email
+            const emailTyping = anime({
+                targets: emailElement,
+                innerHTML: [0, originalEmail].map(value => {
+                    if (value === 0) return '';
+                    return value.split('').map((letter, i) => {
+                        return `<span style="display:inline-block;">${letter}</span>`;
+                    }).join('');
+                }),
+                duration: originalEmail.length * 40,
+                easing: 'steps(' + originalEmail.length + ')',
+            });
+        }
+    });
+
     // Define typing animation with a fallback to ensure content is visible
     setTimeout(() => {
-        // Initialize animations for each text element
+        // Initialize animations for each text element (except email)
         elements.forEach((element, index) => {
+            // Skip the email element as we're handling it separately
+            if (element === emailElement) return;
+            
             // Store the original text
             const text = element.getAttribute('data-text');
             
