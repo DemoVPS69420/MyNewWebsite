@@ -106,3 +106,22 @@ footer {
     white-space: nowrap;
     width: 0;
 }
+
+/* Styles for the hidden email */
+.hidden-email {
+    background-color: #f0f3ff;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    color: #5c6bc0;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px dashed #7289DA;
+}
+
+.hidden-email:hover {
+    background-color: #e0e7ff;
+    transform: scale(1.02);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
