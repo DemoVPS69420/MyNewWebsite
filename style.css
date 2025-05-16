@@ -97,13 +97,12 @@ footer {
     color: white;
 }
 
-/* Animation styles */
-.animate-text {
-    opacity: 0;
-}
-
-/* For text elements that will have typing animation */
-.animate-text span {
-    display: inline-block;
-    opacity: 0;
+/* Ensure all text is visible by default */
+[data-text]::before {
+    content: attr(data-text);
+    position: absolute;
+    color: transparent;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
 }
