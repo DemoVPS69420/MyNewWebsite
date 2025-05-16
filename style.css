@@ -2,53 +2,108 @@ body {
     font-family: sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
 }
 
 header {
-    background-color: #f0f0f0;
-    padding: 20px;
+    background-color: #5c6bc0;
+    padding: 40px 20px;
     text-align: center;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     margin: 0;
+    font-size: 2.5rem;
+    letter-spacing: 1px;
 }
 
 h2 {
     margin: 10px 0;
+    font-weight: 500;
 }
 
 main {
-    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 20px;
 }
 
 .about-me, .discord-server, .contact, .social-media {
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-me:hover, .discord-server:hover, .contact:hover, .social-media:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .social-media ul {
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .social-media li {
-    display: inline-block;
-    margin-right: 20px;
+    margin: 5px;
 }
 
 .social-media a {
-    color: #007bff;
+    color: #5c6bc0;
     text-decoration: none;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 20px;
+    background-color: #f0f3ff;
+    display: inline-block;
+    transition: all 0.3s ease;
 }
 
 .social-media a:hover {
-    color: #0056b3;
+    color: white;
+    background-color: #3f51b5;
+    transform: scale(1.05);
+}
+
+.discord-server a {
+    display: inline-block;
+    background-color: #7289DA;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.discord-server a:hover {
+    background-color: #5b6eae;
 }
 
 footer {
-    background-color: #f0f0f0;
+    background-color: #5c6bc0;
     padding: 20px;
     text-align: center;
+    color: white;
+}
+
+/* Animation styles */
+.animate-text {
+    opacity: 0;
+}
+
+/* For text elements that will have typing animation */
+.animate-text span {
+    display: inline-block;
+    opacity: 0;
 }
