@@ -1,69 +1,59 @@
-// Function to create typing animation for an element
-function createTypingAnimation(element) {
-    // Get the text content
-    const text = element.textContent;
-    // Clear the content
-    element.textContent = '';
-    
-    // Create a span for each character
-    for (let i = 0; i < text.length; i++) {
-        const span = document.createElement('span');
-        span.textContent = text[i];
-        span.style.opacity = 0;
-        element.appendChild(span);
-    }
-    
-    // Create anime.js timeline for typing animation
-    const timeline = anime.timeline({
-        easing: 'easeInOutQuad',
-        complete: () => {
-            // After animation completes, set all spans to be visible
-            // This ensures text remains visible if animations are interrupted
-            Array.from(element.children).forEach(span => {
-                span.style.opacity = 1;
-            });
-        }
-    });
-    
-    // Add animation for each character
-    timeline.add({
-        targets: element.querySelectorAll('span'),
-        opacity: 1,
-        duration: 30,
-        delay: anime.stagger(30),
-        easing: 'easeInOutQuad'
-    });
-    
-    return timeline;
-}
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Select all elements that have a data-text attribute
+    const elements = document.querySelectorAll('[data-text]');
 
-// Wait for the DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', () => {
-    // Select all elements with the animate-text class
-    const elements = document.querySelectorAll('.animate-text');
-    
-    // Create a master timeline
-    const masterTimeline = anime.timeline({
-        easing: 'easeOutExpo'
+    // Make sure content is visible immediately (important for ensuring site content appears)
+    elements.forEach(element => {
+        element.style.opacity = '1';
     });
-    
-    // Add each element's animation to the master timeline with appropriate delays
-    elements.forEach((element, index) => {
-        // Create a new typing animation for this element
-        const typingAnimation = createTypingAnimation(element);
+
+    // Define typing animation with a fallback to ensure content is visible
+    setTimeout(() => {
+        // Initialize animations for each text element
+        elements.forEach((element, index) => {
+            // Store the original text
+            const text = element.getAttribute('data-text');
+            
+            // Create a timeline for this element
+            const timeline = anime.timeline({
+                targets: element,
+                delay: index * 150, // Stagger the animations
+                easing: 'easeInOutSine',
+                complete: function() {
+                    // Ensure the text is fully visible after animation
+                    element.style.opacity = '1';
+                    element.textContent = text; 
+                }
+            });
+            
+            // Add the typing effect to the timeline
+            timeline.add({
+                innerHTML: [0, text].map(value => {
+                    if (value === 0) return '';
+                    return value.split('').map((letter, i) => {
+                        return `<span style="display:inline-block;">${letter}</span>`;
+                    }).join('');
+                }),
+                duration: text.length * 40,
+                delay: 0,
+                easing: 'steps(' + text.length + ')',
+                begin: function() {
+                    // Make element visible at start of animation
+                    element.style.opacity = '1';
+                    element.innerHTML = '';
+                }
+            });
+        });
         
-        // Add to master timeline with delay based on element position
-        // This creates a cascading effect where each section animates after the previous one
-        masterTimeline.add(typingAnimation, index * 100);
-    });
-    
-    // Add some effects to sections as they appear
-    anime({
-        targets: ['section', 'header', 'footer'],
-        opacity: [0, 1],
-        translateY: [20, 0],
-        duration: 800,
-        delay: anime.stagger(200, {start: 500}),
-        easing: 'easeOutExpo'
-    });
+        // Add fade-in and slide-up animation for sections
+        anime({
+            targets: ['section', 'header', 'footer'],
+            opacity: [0, 1],
+            translateY: [20, 0],
+            duration: 800,
+            delay: anime.stagger(200, {start: 300}),
+            easing: 'easeOutExpo'
+        });
+    }, 100); // Short delay to ensure DOM is ready
 });
