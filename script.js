@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Hide the email initially and replace with a click prompt
-    const emailElement = document.querySelector('.contact p');
+    const emailElement = document.querySelector('.email-container');
     const originalEmail = emailElement.getAttribute('data-text');
     emailElement.textContent = "Click to reveal email";
     emailElement.classList.add('hidden-email');
