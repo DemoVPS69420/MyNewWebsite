@@ -1,4 +1,4 @@
-import { animate, createTimeline, utils } from 'https://assets.codepen.io/1137/anime.esm.min.js';
+import { animate, createTimeline, utils } from 'https://cdn.jsdelivr.net/npm/animejs/lib/anime.iife.min.js';
 
 const [ $digitalClock ] = utils.$('#digital');
 
