@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kế hoạch mod Ma Sói · Forge 1.20.1</title>
+<style>
+:root{color-scheme:dark;--bg:#101218;--panel:#191d26;--line:#303746;--text:#eef0f5;--muted:#adb7c9;--accent:#d5ed9a;--blue:#a8c9ff;--orange:#f5bd87;--radius:18px}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:28px}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 'Segoe UI',Arial,sans-serif}a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}button,input,select,textarea{font:inherit}button,select{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:4px}button{background:var(--accent);color:#17200c;border:0;border-radius:9px;padding:9px 17px;font-weight:650}button.secondary{background:#252c39;color:var(--text);border:1px solid var(--line)}aside{position:fixed;inset:0 auto 0 0;width:245px;border-right:1px solid var(--line);padding:35px 24px;background:#12151c;overflow:auto}.brand{font-size:20px;font-weight:800;letter-spacing:1px}.brand small{display:block;font-size:11px;color:var(--accent);letter-spacing:2px;margin-top:5px}nav{margin-top:42px}nav a{display:block;color:var(--muted);padding:10px 12px;border-radius:8px;font-size:14px}nav a:hover{background:var(--panel);color:var(--text);text-decoration:none}.aside-note{font-size:12px;color:var(--muted);margin-top:40px}main{max-width:1450px;margin-left:245px;padding:48px clamp(24px,5vw,80px) 70px}.eyebrow{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent)}h1{font-size:clamp(36px,5vw,66px);line-height:1.12;letter-spacing:-2px;margin:20px 0}h1 span{color:var(--accent)}h2{font-size:28px;line-height:1.3;letter-spacing:-.6px;margin:10px 0 18px}h3{font-size:19px;line-height:1.4;margin:0 0 12px}p{margin:0 0 15px}.lead{max-width:780px;color:var(--muted);font-size:18px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:25px 0}.pill{display:inline-block;border:1px solid var(--line);border-radius:30px;padding:4px 12px;font-size:12px;color:var(--muted)}.pill.proposed{color:var(--orange);border-color:#705033}.pill.confirmed{color:var(--accent);border-color:#56653f}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:32px 0}.stat{border-top:1px solid var(--line);padding:18px 0}.stat strong{font-size:33px;display:block}.stat span{color:var(--muted);font-size:13px}.callout{border-left:3px solid var(--accent);padding:18px 22px;background:#1b221b;border-radius:0 12px 12px 0}.callout.warn{border-color:var(--orange);background:#282119}section{margin-top:64px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:16px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.card{padding:24px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}.card p,.card li{color:var(--muted)}.card .pill{margin-bottom:15px}ul,ol{padding-left:21px;margin:12px 0}li{margin:7px 0}.small{font-size:13px;color:var(--muted)}.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:24px 0}.flow div{background:var(--panel);padding:17px;border:1px solid var(--line);border-radius:12px}.flow b{display:block;color:var(--accent);font-size:12px;margin-bottom:8px}.flow span{color:var(--muted);font-size:13px;display:block;margin-top:8px}.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}table{width:100%;border-collapse:collapse;font-size:14px;min-width:660px}th,td{text-align:left;padding:15px 18px;border-bottom:1px solid var(--line);vertical-align:top}th{background:#202632;color:var(--accent)}td{color:var(--muted)}tr:last-child td{border:0}.roadmap{counter-reset:stage;display:grid;gap:15px}.stage{display:grid;grid-template-columns:50px 1fr;gap:18px;padding:24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel)}.stage:before{counter-increment:stage;content:counter(stage,decimal-leading-zero);font-size:22px;font-weight:700;color:var(--accent)}.stage p{color:var(--muted)}.deliver{font-size:14px;color:var(--blue)!important;margin:8px 0 0!important}.decision{margin-bottom:14px}.decision label{display:block;font-weight:600;margin-bottom:7px}.decision select{width:100%;padding:10px;border:1px solid var(--line);background:#11151d;color:var(--text);border-radius:8px}.filters{display:flex;gap:10px;margin:18px 0;flex-wrap:wrap}.filters input,.filters select{padding:11px 14px;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:9px}.filters input{flex:1;min-width:210px}details{border:1px solid var(--line);border-radius:12px;background:var(--panel);margin-bottom:10px}summary{cursor:pointer;padding:16px;line-height:1.5;font-weight:600}summary .pill{margin-right:8px}.question-body{padding:0 20px 20px}.question-body p{color:var(--muted)}textarea{width:100%;min-height:95px;padding:12px;background:#11151d;color:var(--text);border:1px solid var(--line);border-radius:8px;resize:vertical}footer{margin-top:60px;border-top:1px solid var(--line);padding-top:24px;color:var(--muted);font-size:13px}.status{min-height:25px;color:var(--accent);font-size:13px}.mono{font-family:Consolas,monospace}.print-only{display:none}@media(max-width:1000px){aside{position:relative;width:auto;border-right:0;border-bottom:1px solid var(--line);padding:20px 24px}nav{display:flex;gap:5px;flex-wrap:wrap;margin-top:14px}nav a{padding:5px 8px}.aside-note{display:none}main{margin:0;padding:30px 24px}.flow{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.grid{grid-template-columns:1fr}.stats{gap:8px}.stat strong{font-size:26px}.stat span{font-size:12px}.card{padding:20px}.section-head{display:block}.stage{grid-template-columns:32px 1fr;padding:18px;gap:12px}.flow{grid-template-columns:1fr}h1{letter-spacing:-1px}.filters>*{width:100%}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{*{color:#111!important;background:white!important}aside,.toolbar,.filters,.no-print,.status{display:none!important}main{margin:0;padding:0;max-width:none}h1{font-size:36px}section{margin-top:30px}.card,.stage,details{break-inside:avoid}.grid{gap:12px}table{min-width:0}.print-only{display:block}textarea{min-height:65px;border:1px solid #888}a{text-decoration:underline}details{display:block}footer{margin-top:25px}}
+</style>
+</head>
+<body>
+<aside><div class="brand">WEREWOLF<small>MINECRAFT · PROJECT PLAN</small></div><nav aria-label="Mục lục"><a href="#overview">01 / Tổng quan</a><a href="#direction">02 / Phương án đề xuất</a><a href="#night">03 / Một đêm diễn ra thế nào</a><a href="#systems">04 / Các hệ thống</a><a href="#roadmap">05 / Lộ trình triển khai</a><a href="#decisions">06 / Duyệt phương án</a><a href="#questions">07 / Câu hỏi chi tiết</a><a href="#verification">08 / Kiểm chứng</a></nav><div class="aside-note">BẢN KẾ HOẠCH 01<br>27 tháng 10, 2026<br><br>HTML chạy độc lập, không cần mạng.<br>Chưa triển khai mod.</div></aside>
+<main>
+<header id="overview"><div class="eyebrow">Kế hoạch thiết kế & triển khai · Forge 1.20.1</div><h1>Một ngôi làng.<br><span>Nhiều bí mật.</span></h1><p class="lead">Mod Ma Sói với vai trò có chiều sâu, hoạt cảnh NPC tại giường, các kênh giao tiếp riêng và luật trận do server quản lý. Đây là phương án mình đề xuất để chuyển bộ luật hiện tại thành một trải nghiệm Minecraft có thể chơi và kiểm chứng.</p><div class="toolbar"><a href="#direction"><button type="button">Xem phương án</button></a><button type="button" class="secondary" id="print">In / Lưu PDF</button><a href="CAU_HOI_VA_KE_HOACH.md">Tài liệu câu hỏi Markdown ↗</a></div><span class="pill confirmed">Yêu cầu đã xác nhận</span> <span class="pill proposed">Đề xuất chưa duyệt</span><div class="stats"><div class="stat"><strong>126</strong><span>Mục vai trò trong bản nguồn đã đọc</span></div><div class="stat"><strong>62</strong><span>Câu hỏi đã phân nhóm và ưu tiên</span></div><div class="stat"><strong>6</strong><span>Mốc triển khai có đầu ra kiểm chứng</span></div></div><div class="callout">Mình đề xuất bắt đầu bằng <strong>một đấu trường, một trận hoạt động</strong>, kiểm chứng giường–GUI–NPC–voice trước, rồi mở rộng các nhóm vai trò. Toàn bộ vai trò đã mô tả vẫn nằm trong phạm vi kế hoạch dài hạn; chưa coi 126 mục là 126 vai trò đã hoàn chỉnh.</div></header>
+
+<section id="direction"><div class="eyebrow">02 / Quyết định thiết kế</div><h2>Phương án mình đề xuất</h2><div class="grid">
+<article class="card"><span class="pill proposed">P01 · Quy mô</span><h3>Một đấu trường được quản lý</h3><p>Admin đặt khu vực chơi, điểm tập trung và giường cho từng người. Ban ngày người chơi đi lại trong khu vực; hết thời gian chuẩn bị đêm, hệ thống đưa người chưa về tới giường.</p><p><strong>Lý do:</strong> dễ kiểm soát khóa di chuyển, trạng thái người chết và việc khôi phục sau trận.</p><p class="small">Đánh đổi: chưa chạy nhiều trận đồng thời ở mốc đầu. Liên quan A04, A05, D01.</p></article>
+<article class="card"><span class="pill proposed">P02 · Lượt hành động</span><h3>Đêm chung, xử lý kỹ năng theo loại</h3><p>Các vai đủ điều kiện được thao tác trong cùng pha đêm, có thời hạn riêng do admin đặt. Kỹ năng tức thì có hiệu lực ngay; các lựa chọn cuối đêm được tổng hợp theo bảng ưu tiên.</p><p><strong>Lý do:</strong> giữ được tình huống vượt ngục rồi tiếp tục dùng kỹ năng, hoặc phản ứng khi có người chết giữa đêm.</p><p class="small">Đánh đổi: cần chốt hạn sửa lựa chọn và cách xử lý người được giải chặn muộn. Liên quan A03, A12.</p></article>
+<article class="card"><span class="pill proposed">P03 · NPC</span><h3>Hoạt cảnh thể hiện kỹ năng</h3><p>NPC xuất hiện gần giường, thực hiện hành động phù hợp và được dọn khi cảnh kết thúc. Vai đi thăm có trạng thái trong luật riêng, không phụ thuộc việc NPC đi được tới đích.</p><p><strong>Lý do:</strong> cảnh đẹp nhưng không làm sai kết quả khi đường đi bị kẹt. Dùng nhân vật ẩn danh nếu kỹ năng không được phép lộ người thực hiện.</p><p class="small">Mỗi cảnh có danh sách người được nhìn và nghe; mục tiêu không mặc định được biết mình đang được bảo vệ. Liên quan D02–D04.</p></article>
+<article class="card"><span class="pill proposed">P04 · Súng</span><h3>Chọn mục tiêu, diễn phát bắn</h3><p>Người chơi chọn mục tiêu hợp lệ, server giải quyết kỹ năng, TACZ thể hiện phát bắn và hiệu ứng. Số lượt dùng được quản lý theo vai trò.</p><p><strong>Lý do:</strong> giữ luật suy luận, tránh việc bắn trượt, vật cản hoặc nạp đạn làm thay đổi kỹ năng.</p><p class="small">Đánh đổi: không phải chế độ đấu súng ngắm tự do. Marksman dùng cung/nỏ hay TACZ vẫn cần chốt riêng tại C03.</p></article>
+<article class="card"><span class="pill proposed">P05 · Giao tiếp</span><h3>Voice theo quyền, chat chữ cho ẩn danh</h3><p>Giữ luật voice ban đêm đã xác nhận. Chat ngục, giao tiếp với người chết và các kênh cần ẩn danh dùng khung chat riêng; quyền gửi và quyền đọc được kiểm tra riêng.</p><p><strong>Lý do:</strong> giọng nói có thể tiết lộ danh tính dù tên đã ẩn. Ghost Wolf, Soulbinder và các ngoại lệ được cấu hình theo luật vai trò.</p><p class="small">Đánh đổi: cần thao tác chọn kênh chat. Liên quan D06–D08.</p></article>
+<article class="card"><span class="pill proposed">P06 · Chuyển thể bộ luật</span><h3>Giữ luật, xác minh các ngoại lệ</h3><p>Phân biệt vai thật, phe thật, phe thắng cùng, aura và thông tin bị giả dạng. Không tái tạo softlock, lỗi lộ chat hay ghi chú lịch sử thành cơ chế mặc định.</p><p><strong>Lý do:</strong> tài liệu hiện có cả mô tả hiện hành, luật cũ và trường hợp mâu thuẫn. Các điểm đó cần quyết định rõ trước khi triển khai.</p><p class="small">Chưa tự chọn bên đúng cho Wolf Shaman/Illusionist, Sorcerer hoặc Lurker. Liên quan A11 và nhóm B.</p></article>
+</div></section>
+
+<section id="night"><div class="eyebrow">03 / Trải nghiệm một vòng chơi</div><h2>Từ thảo luận đến bình minh</h2><p class="lead">Luồng dưới đây là thiết kế đề xuất. Thời lượng do admin cấu hình; thứ tự kỹ năng cụ thể sẽ được chốt trong bảng luật.</p><div class="flow"><div><b>01 · BAN NGÀY</b>Thảo luận & kỹ năng ngày<span>Chat/voice theo trạng thái; chuẩn bị các hành động dành cho đêm tiếp theo.</span></div><div><b>02 · BỎ PHIẾU</b>Tổng hợp phiếu và ngoại lệ<span>Hòa thường không treo cổ; xét Judge, Final March, bảo vệ và hủy bỏ phiếu.</span></div><div><b>03 · VỀ GIƯỜNG</b>Khóa di chuyển, đổi kênh<span>Kiểm tra giường, người bị giam và quyền hành động; không cho ngủ bỏ qua đêm.</span></div><div><b>04 · BAN ĐÊM</b>Nhận và xử lý kỹ năng<span>Hành động tức thì chạy trong đêm; lựa chọn trì hoãn chờ tổng kết.</span></div></div><div class="grid"><article class="card"><h3>Khi đến lượt của người chơi</h3><ol><li>Nhận thông báo riêng và mở GUI mục tiêu.</li><li>Chọn hoặc sửa hành động trong thời gian cho phép.</li><li>Server xác thực vai trò, mục tiêu, trạng thái và tài nguyên.</li><li>Hiện phản hồi/hoạt cảnh đúng quyền được biết.</li></ol></article><article class="card"><h3>Khi đêm kết thúc</h3><ol><li>Khóa nhận lựa chọn và xử lý theo bảng ưu tiên.</li><li>Giải quyết bảo vệ, chuyển hướng, chết và phản ứng dây chuyền.</li><li>Thực hiện chuyển vai/hồi sinh và thông tin đến hạn theo luật.</li><li>Kiểm tra chiến thắng ở điểm đã quy định, rồi công bố bình minh.</li></ol><p class="small">Một số vai có thể kết thúc trận ngay giữa pha; không đợi bình minh cho mọi trường hợp.</p></article></div><div class="callout warn" style="margin-top:18px"><strong>Điểm phải kiểm chứng trước:</strong> ngủ thật có mở được GUI và xem hoạt cảnh đúng cách trên client Forge 1.20.1 hay không. Nếu không đạt, cần trình bản thử mô phỏng tư thế nằm tại giường để duyệt thay thế.</div></section>
+
+<section id="systems"><div class="eyebrow">04 / Kiến trúc & tích hợp</div><h2>Mỗi hệ thống có một trách nhiệm rõ ràng</h2><div class="table-wrap"><table><thead><tr><th>Hệ thống</th><th>Phương án đề xuất</th><th>Điểm cần giữ đúng</th></tr></thead><tbody><tr><td>Luật trận</td><td>Server quản lý pha, vai, hành động, hiệu ứng và kết quả thắng.</td><td>Client gửi lựa chọn, không tự quyết định sát thương hay phe thắng.</td></tr><tr><td>Thông tin vai trò</td><td>Tách sự thật và thông tin từng người được thấy.</td><td>Điều tra, cáo phó, giả dạng và thông tin kế thừa có thể khác nhau.</td></tr><tr><td>Trạng thái người chơi</td><td>Sống, chết, undead, bỏ trốn, offline và chờ hồi sinh được biểu diễn riêng.</td><td>Không mặc định chết là mất mọi kỹ năng hoặc được thấy hết bí mật.</td></tr><tr><td>NPC · Easy NPC</td><td>Điều khiển cảnh và tài nguyên animation từ nguồn đã cung cấp.</td><td>Khả năng hiện animation riêng theo người nhận chưa được kiểm chứng.</td></tr><tr><td>Voice · Simple Voice Chat</td><td>Lọc người gửi/người nhận, kênh nhóm, proximity và quan sát.</td><td>Khóa đúng khi giam, đổi phe, hồi sinh và kết nối lại.</td></tr><tr><td>Timer · TAB</td><td>Khảo sát cơ chế bossbar và nền tảng tương thích trước khi tích hợp.</td><td>Chưa coi TAB là phụ thuộc Forge cài trực tiếp; timer bí mật chỉ hiện riêng.</td></tr><tr><td>Súng · TACZ</td><td>Lớp kết nối súng với kỹ năng, hạn mức và hiệu ứng.</td><td>Không áp dụng hai lần sát thương; không chuyển đạn để vượt luật.</td></tr><tr><td>Quan sát · Vanish</td><td>Kiểm soát ẩn người chết, tên, trang bị, va chạm và tiếng động.</td><td>Vanish không tự quyết định quyền xem vai trò hay quyền voice.</td></tr><tr><td>Âm thanh · sounds</td><td>Chỉ kiểm kê và sử dụng tài nguyên trong thư mục sounds được yêu cầu.</td><td>Kiểm tra giấy phép, định dạng và quyền nghe từng hiệu ứng.</td></tr></tbody></table></div></section>
+
+<section id="roadmap"><div class="eyebrow">05 / Các mốc bàn giao</div><h2>Triển khai theo bằng chứng hoạt động</h2><div class="roadmap">
+<article class="stage"><div><h3>Chuẩn hóa luật và quyết định nền tảng</h3><p>Đối chiếu 126 mục, lập danh mục vai, bảng tương tác, thứ tự ưu tiên và điều kiện thắng. Chốt P0 ảnh hưởng nền tảng; để mở những câu chỉ ảnh hưởng vai chưa triển khai.</p><p class="deliver">Đầu ra: đặc tả luật có mã tham chiếu và các ví dụ kết quả được duyệt.</p></div></article>
+<article class="stage"><div><h3>Bản thử giường, GUI, NPC, voice và súng</h3><p>Tạo môi trường Forge riêng; thử luồng nằm giường và chọn mục tiêu, một cảnh NPC, ma trận voice và phát bắn có kiểm soát.</p><p class="deliver">Đạt khi: các luồng chạy trên client/server thực tế; nêu rõ tích hợp nào còn thiếu bằng chứng.</p></div></article>
+<article class="stage"><div><h3>Trận đầu tiên có thể chơi trọn vẹn</h3><p>Phòng chờ, chia vai, giường, timer, bỏ phiếu, chết/quan sát và kết thúc trận. Đề xuất bộ thử: Villager, Regular Werewolf, Doctor, Seer — số lượng do admin đặt.</p><p class="deliver">Đạt khi: nhiều người chơi hoàn thành vòng ngày/đêm và kết thúc, hủy, vào lại không để sót trạng thái.</p></div></article>
+<article class="stage"><div><h3>Mở rộng vai trò theo nhóm cơ chế</h3><p>Bảo vệ/điều tra → tấn công/giam giữ → hồi sinh/kế thừa → đổi phe/giả dạng → luật đặc biệt. Thêm vai cùng các tương tác liên quan, không chỉ thêm nút kỹ năng.</p><p class="deliver">Đạt khi: mỗi nhóm có tình huống đối kháng, chặn kỹ năng, tài nguyên và ngoại lệ đã kiểm chứng.</p></div></article>
+<article class="stage"><div><h3>Hoàn thiện hoạt cảnh và công cụ quản trò</h3><p>Thay cảnh thử bằng cảnh theo kỹ năng; hoàn thiện GUI, lưới người chơi, chat riêng, thông báo, cấu hình và quyền admin.</p><p class="deliver">Đạt khi: thông tin không lộ qua tên NPC, âm thanh, inventory, bossbar hoặc bảng người chơi.</p></div></article>
+<article class="stage"><div><h3>Kiểm thử toàn trận và đóng gói</h3><p>Chạy các tổ hợp vai khó, mất kết nối, hồi sinh, đổi phe và hủy trận; kiểm tra tài nguyên được trả lại. Đóng gói JAR và phụ thuộc đúng phiên bản.</p><p class="deliver">Bàn giao: JAR, hướng dẫn cài/host, cấu hình mẫu, lệnh admin và giới hạn còn lại.</p></div></article>
+</div><p class="small" style="margin-top:16px">Chưa đưa lịch ngày hoàn thành khi khả năng tích hợp và số luật còn mở chưa được chốt. Mỗi mốc có tiêu chí đạt rõ ràng để đánh giá tiến độ.</p></section>
+
+<section id="decisions"><div class="eyebrow">06 / Ghi ý kiến của bạn</div><h2>Xem và đánh dấu phương án</h2><p>Các lựa chọn dưới đây là ghi chú duyệt. Chúng không tự triển khai, không sửa file nguồn và không tự gửi về cuộc trò chuyện.</p><div class="card"><div id="decision-list" class="grid"></div><label for="general-note">Ghi chú chung / phương án bạn muốn thay đổi</label><textarea id="general-note" placeholder="Bạn có thể ghi ý kiến tại đây rồi xuất file trả lời."></textarea><div class="toolbar"><button id="export" type="button">Tải câu trả lời .md</button><button id="save" class="secondary" type="button">Lưu nháp trên trình duyệt</button></div><p id="save-status" class="status" role="status" aria-live="polite"></p><p class="small">Bản nháp chỉ nằm trong trình duyệt đang mở và có thể không được giữ khi đổi trình duyệt hoặc đường dẫn. Tải file .md để giữ một bản chắc chắn, sau đó đưa file vào thư mục dự án hoặc gửi lại khi muốn mình đọc.</p></div></section>
+
+<section id="questions"><div class="eyebrow">07 / Các điểm cần chốt</div><h2>62 câu hỏi, trả lời theo từng phần</h2><p class="lead">Câu hỏi được đưa từ bản Markdown vào HTML để bạn xem ngay tại đây. Có thể lọc theo mức ưu tiên và nhóm; không cần trả lời tất cả cùng lúc.</p><div class="filters"><input id="search" type="search" aria-label="Tìm câu hỏi" placeholder="Tìm vai trò, mã câu hỏi hoặc nội dung…"><select id="priority" aria-label="Lọc ưu tiên"><option value="">Mọi ưu tiên</option><option>P0</option><option>P1</option><option>P2</option></select><select id="group" aria-label="Lọc nhóm"><option value="">Mọi nhóm</option><option value="A">A · Nền tảng</option><option value="B">B · Mâu thuẫn</option><option value="C">C · Chi tiết vai</option><option value="D">D · Trải nghiệm</option></select></div><p id="result-count" class="small" role="status"></p><div id="question-list"></div><noscript>Cần bật JavaScript để xem danh sách câu hỏi và ghi câu trả lời. Bạn vẫn có thể đọc toàn bộ câu hỏi trong CAU_HOI_VA_KE_HOACH.md đi kèm.</noscript></section>
+
+<section id="verification"><div class="eyebrow">08 / Tiêu chí chất lượng</div><h2>Kiểm chứng đúng ở nơi tính năng hoạt động</h2><div class="grid"><article class="card"><h3>Luật & trạng thái</h3><ul><li>Thứ tự bảo vệ, xuyên bảo vệ, chuyển hướng và chết dây chuyền.</li><li>Phiếu thật/giả/ẩn, cộng phiếu và các trường hợp hòa.</li><li>Thông tin điều tra dưới nhiều lớp giả dạng.</li><li>Kế thừa tài nguyên, hồi sinh và đổi phe trong cùng pha.</li><li>Undead, thắng phụ và điều kiện kết thúc có trọng số.</li></ul></article><article class="card"><h3>Client & server thật</h3><ul><li>Nằm giường vẫn thao tác GUI, không tự bỏ qua đêm.</li><li>Đúng người được nghe voice và nhìn thấy hoạt cảnh.</li><li>TACZ không gây sát thương hai lần hay nhân đạn.</li><li>Người chết không lộ qua tên, vật phẩm, va chạm.</li><li>Vào lại/hủy trận trả đúng trạng thái và quyền giao tiếp.</li></ul></article></div><div class="callout warn" style="margin-top:18px">Build thành công chỉ chứng minh mã biên dịch được. Các kiểm tra voice, animation, giường và súng cần client thực tế; kế hoạch này chưa phải báo cáo tính năng đã hoạt động.</div></section>
+<footer><p>Nguồn: <a href="prompt.md">prompt.md</a> · <a href="role_Prompt.md">role_Prompt.md</a> · <a href="CAU_HOI_VA_KE_HOACH.md">Câu hỏi & kế hoạch Markdown</a></p><p>Bản đọc ngày 27/10/2026 · Nguồn vai trò có 126 mục. Nếu file nguồn tiếp tục thay đổi, cần cập nhật bản HTML này. Đây là tài liệu thiết kế cục bộ; không có thư viện, font hay dịch vụ mạng bên ngoài.</p></footer>
+</main>
+<script id="question-data" type="application/json">[
+  {
+    "id": "A01",
+    "priority": "P0",
+    "question": "Bản đầu cần bao phủ toàn bộ vai trò đã đủ luật hay chia các mốc chơi thử?",
+    "context": "Giữ toàn bộ là phạm vi dài hạn; chia mốc nền tảng → bảo vệ/điều tra → tấn công/giam → hồi sinh/chuyển phe → vai trò phức tạp.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "A02",
+    "priority": "P0",
+    "question": "Trận bắt đầu bằng đêm 1 hay ngày 1? Thứ tự chia vai, gán mục tiêu, Cupid và Instigator ra sao?",
+    "context": "Chia vai và gán quan hệ khởi tạo trước đêm 1; công bố những thông tin được quy định ở ngày 1. Cần chốt thứ tự chính xác để tránh mục tiêu không hợp lệ.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "A03",
+    "priority": "P0",
+    "question": "Các vai trò hành động tuần tự, đồng thời hay kết hợp? File có giết tức thì, vượt ngục rồi dùng kỹ năng trong phần đêm còn lại.",
+    "context": "Kết hợp: một pha đêm chung, các khoảng hành động có thời hạn; hỗ trợ hành động tức thì và tổng kết cuối đêm. Dựng timeline cụ thể để duyệt.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "A04",
+    "priority": "P0",
+    "question": "Giới hạn số người dự kiến, cho phép trùng vai trò và nhiều sát thủ/giáo chủ cùng ván đến mức nào?",
+    "context": "Cho phép trùng theo cấu hình nhưng kiểm tra tổ hợp; các phe thứ ba độc lập phải có định danh nhóm riêng. Cần số người mục tiêu để thiết kế GUI và lưới.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "A05",
+    "priority": "P0",
+    "question": "Phạm vi trận là một đấu trường trong server hay toàn bộ server? Có cần nhiều trận đồng thời ở bản đầu?",
+    "context": "Một đấu trường, một trận hoạt động ở bản đầu; chỉ áp dụng khóa/voice/luật lên người thuộc trận.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "A06",
+    "priority": "P0",
+    "question": "Treo cổ cần người nhiều phiếu nhất hay phải đạt ngưỡng tối thiểu/đa số? Có nút bỏ qua và tự bỏ phiếu cho mình không?",
+    "context": "Chưa chọn mặc định: Deep Sea Terror có luật loại người khỏi ngưỡng phiếu nên cần công thức rõ ràng.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "A07",
+    "priority": "P0",
+    "question": "Khi sói hòa, ngẫu nhiên trong các mục tiêu đồng hạng cao nhất hay tất cả mục tiêu có ít nhất một phiếu? Nếu không ai vote thì sao?",
+    "context": "Ngẫu nhiên đều trong nhóm đồng hạng cao nhất; không có phiếu thì không tấn công. Luật hòa đã xác nhận, chỉ làm rõ tập lựa chọn.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "A08",
+    "priority": "P0",
+    "question": "Công thức thắng của Sói và thứ tự ưu tiên giữa thắng ngay, chết dây chuyền, hồi sinh đang chờ, Tổng Thống, Fool, Lovers và phe thứ ba?",
+    "context": "Dựng bảng ưu tiên có ví dụ. Tính trọng số Split Wolf/Lurker, loại Fan chưa biến và người không phe theo luật; không dùng phép đếm số sói đơn giản.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "A09",
+    "priority": "P0",
+    "question": "Khi mất kết nối: giữ chỗ bao lâu, có tạm dừng, thay người hoặc coi là bỏ trốn?",
+    "context": "Phân biệt mất kết nối với chủ động bỏ trốn; giữ trạng thái để vào lại; xử lý President theo ngoại lệ riêng. Chưa chọn thời gian.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "A10",
+    "priority": "P1",
+    "question": "Server tắt giữa trận cần khôi phục trận hay hủy và trả trạng thái người chơi?",
+    "context": "Lưu bản trạng thái ở ranh giới pha; chỉ công bố hỗ trợ khôi phục sau khi kiểm thử đầy đủ.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "A11",
+    "priority": "P0",
+    "question": "Có tái hiện lỗi, quy định báo cáo, perk, emote/hoa hồng và các chế độ Wolvesville Classic/Row Wars/Grid Wars được nhắc trong tài liệu không?",
+    "context": "Luật hiện hành là cơ sở; ghi chú lịch sử và lỗi game gốc là tham khảo; chưa triển khai perk, báo cáo và chế độ phụ. Không tái tạo softlock/lộ chat.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "A12",
+    "priority": "P1",
+    "question": "Khi hết giờ mà chưa chọn, mặc định bỏ lượt hay chọn ngẫu nhiên? Cho sửa/hủy lựa chọn tới thời điểm nào?",
+    "context": "Theo ngoại lệ từng vai trò; mặc định bỏ lượt và cho sửa trước khi khóa. Wolf Seer/Sorcerer/Blind Wolf có quy tắc tự chọn riêng.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "B01",
+    "priority": "P0",
+    "question": "Lớp nào thắng, hay khác nhau theo vai trò điều tra?",
+    "context": "Seer/Aura Seer/Gambler (mục bắt đầu dòng 483/510/571) ưu tiên Illusionist khi chồng Wolf Shaman; Wolf Shaman/Illusionist (1657/2381) nói Shaman ưu tiên.",
+    "contextLabel": "Nguồn và điểm cần đối chiếu",
+    "answer": ""
+  },
+  {
+    "id": "B02",
+    "priority": "P0",
+    "question": "Chốt kết quả riêng của Gambler và Violinist đối với Sorcerer.",
+    "context": "Gambler (571) nói Sorcerer ngụy trang hiện Dân Làng; Sorcerer (1961) nói Gambler nhìn ra phe Sói. Violinist (660) và Sorcerer cũng mô tả trái chiều về ngụy trang khi so sánh với sói chết.",
+    "contextLabel": "Nguồn và điểm cần đối chiếu",
+    "answer": ""
+  },
+  {
+    "id": "B03",
+    "priority": "P0",
+    "question": "Tách rõ xem phiếu ngày/đêm, đọc chat, tự gửi kết quả và hành động đánh dấu chia sẻ.",
+    "context": "Sorcerer (1961) vừa nói xem được phiếu sói vừa nói không xem được phiếu đêm; thông tin điều tra vừa nói không chia sẻ vừa nói gửi vào chat Sói.",
+    "contextLabel": "Nguồn và điểm cần đối chiếu",
+    "answer": ""
+  },
+  {
+    "id": "B04",
+    "priority": "P0",
+    "question": "Quy tắc áp dụng khi Lurker chưa có phe và đã vào phe Làng khác nhau thế nào?",
+    "context": "Lurker (2578) nói không thể bị cải đạo trực tiếp, nhưng cuối mục nói Kitten Wolf/Bandit có thể chuyển; Kitten Wolf (1528) nói không chuyển được Lurker.",
+    "contextLabel": "Nguồn và điểm cần đối chiếu",
+    "answer": ""
+  },
+  {
+    "id": "B05",
+    "priority": "P1",
+    "question": "Có cho phép hành động đó khi Priest thuộc giáo phái không?",
+    "context": "Priest (406) vừa cấm vừa cho phép nhắm Giáo Chủ của mình.",
+    "contextLabel": "Nguồn và điểm cần đối chiếu",
+    "answer": ""
+  },
+  {
+    "id": "B06",
+    "priority": "P1",
+    "question": "Sau từng nguyên nhân chết, còn chặn kỹ năng, chặn chat và bảo vệ hay không?",
+    "context": "Warden (260) nói người còn sống vẫn bị chặn sau cái chết giữa đêm, trừ vũ khí/vượt ngục; cuối mục nói nhà giam hủy như không ai bị giam.",
+    "contextLabel": "Nguồn và điểm cần đối chiếu",
+    "answer": ""
+  },
+  {
+    "id": "B07",
+    "priority": "P1",
+    "question": "Khiên riêng chỉ có một lần cả ván hay hồi mỗi đêm? Tự bảo vệ có dùng chung tài nguyên đó không?",
+    "context": "Bodyguard (78) nói tự bảo vệ mỗi đêm trước đòn đầu, đồng thời có trạng thái mất khiên kéo dài và khiên Forger không bù được.",
+    "contextLabel": "Nguồn và điểm cần đối chiếu",
+    "answer": ""
+  },
+  {
+    "id": "B08",
+    "priority": "P1",
+    "question": "Cấp sẵn nhiều miếng cho một người hay tự trừ kho khi mục tiêu bị đánh thêm? Mỗi mục tiêu ít nhất tốn một miếng khi chốt lượt?",
+    "context": "Butcher (54): thịt đã đưa tiêu hao dù không bị đánh; đòn tiếp theo lại trừ thêm thịt.",
+    "contextLabel": "Nguồn và điểm cần đối chiếu",
+    "answer": ""
+  },
+  {
+    "id": "B09",
+    "priority": "P1",
+    "question": "Một lượt chặn tổng cộng trong hai đêm hay một lượt mỗi đêm? Đêm đặt được tính là đêm thứ nhất?",
+    "context": "Snow Angel (69): bảo vệ khỏi một đòn trong hai đêm.",
+    "contextLabel": "Nguồn và điểm cần đối chiếu",
+    "answer": ""
+  },
+  {
+    "id": "B10",
+    "priority": "P1",
+    "question": "Khi kích hoạt, khiên chặn một đòn hay mọi đòn hợp lệ của đêm đó?",
+    "context": "Forger (1077): khiên cứu một lần nhưng phần chi tiết nói chặn đòn trong một đêm.",
+    "contextLabel": "Nguồn và điểm cần đối chiếu",
+    "answer": ""
+  },
+  {
+    "id": "B11",
+    "priority": "P1",
+    "question": "Được trao từ pha nào và có cho trao ban ngày không?",
+    "context": "Fortune Teller (1311): mô tả sau đêm đầu và trao vào đêm, nhưng chi tiết ghi có thể trao bất cứ khi nào.",
+    "contextLabel": "Nguồn và điểm cần đối chiếu",
+    "answer": ""
+  },
+  {
+    "id": "B12",
+    "priority": "P1",
+    "question": "Hòa nhưng mục tiêu chết thì Admirer có thắng không?",
+    "context": "Admirer (2625): thắng phụ khi mục tiêu sống; cuối mục ghi thắng nếu hòa.",
+    "contextLabel": "Nguồn và điểm cần đối chiếu",
+    "answer": ""
+  },
+  {
+    "id": "B13",
+    "priority": "P1",
+    "question": "Khi kích hoạt trong pha bỏ phiếu hiện tại, Revolt tác động hôm nay hay hôm sau?",
+    "context": "Anarchist (2132): chi tiết vừa nói Revolt cùng Pacifist rút ngắn bỏ phiếu ngay, vừa nói dùng trong bỏ phiếu sẽ bỏ qua ngày hôm sau.",
+    "contextLabel": "Nguồn và điểm cần đối chiếu",
+    "answer": ""
+  },
+  {
+    "id": "B14",
+    "priority": "P0",
+    "question": "Xác nhận ngoại lệ cụ thể ưu tiên hơn mô tả chung; “còn ít nhất một dân làng” nghĩa là thành viên phe Làng, không bắt buộc vai Villager thường?",
+    "context": "Villager (1) liệt kê Recruits là mối đe dọa; Instigator (2557) cho Làng thắng khi chỉ còn Recruit dân làng vô hại sau khi thủ lĩnh chết.",
+    "contextLabel": "Nguồn và điểm cần đối chiếu",
+    "answer": ""
+  },
+  {
+    "id": "B15",
+    "priority": "P1",
+    "question": "Giữ Fool là ngoại lệ; có ngoại lệ nào khác cho thắng kế thừa không?",
+    "context": "Grave Robber (1426) nói mục tiêu phe 3 thắng cùng người lấy vai; Fool (2088) nói Fool gốc không thắng cùng Grave Robber.",
+    "contextLabel": "Nguồn và điểm cần đối chiếu",
+    "answer": ""
+  },
+  {
+    "id": "B16",
+    "priority": "P1",
+    "question": "Mọi nguyên nhân chết của Yule đều giải phóng hay chỉ treo cổ?",
+    "context": "Yule Wolf (1582): phần đầu giải phóng khi Yule chết, phần sau chỉ nêu hiến tế hoặc treo cổ Yule.",
+    "contextLabel": "Nguồn và điểm cần đối chiếu",
+    "answer": ""
+  },
+  {
+    "id": "B17",
+    "priority": "P1",
+    "question": "Ngoại lệ này cần những loại bảo vệ nào và áp dụng thứ tự tấn công ra sao?",
+    "context": "Berserk (1768): tấn công xuyên bảo vệ giết cả mục tiêu và người bảo vệ; ngoại lệ Sói + sát thủ cùng nhắm lại nói mục tiêu sống.",
+    "contextLabel": "Nguồn và điểm cần đối chiếu",
+    "answer": ""
+  },
+  {
+    "id": "C01",
+    "priority": "P1",
+    "question": "Bác sĩ có tự bảo vệ hoặc bảo vệ cùng người liên tiếp được không? Các vai trò không ghi rõ tự chọn có chung mặc định nào?",
+    "context": "Doctor và quy tắc chọn mục tiêu dùng chung; không ghi đè ngoại lệ tự chọn đã có.",
+    "contextLabel": "Nguồn và ngữ cảnh",
+    "answer": ""
+  },
+  {
+    "id": "C02",
+    "priority": "P1",
+    "question": "Bully được ném bao nhiêu lần trong một pha/ngày, có thời gian chờ không?",
+    "context": "Mục 196 nói vô hạn đá nhưng tối đa hai lần giết; nếu không giới hạn tốc độ có thể chặn toàn bộ người chơi ngay.",
+    "contextLabel": "Nguồn và ngữ cảnh",
+    "answer": ""
+  },
+  {
+    "id": "C03",
+    "priority": "P1",
+    "question": "Marksman có tối đa một phát mỗi đêm không? Bắn bị bảo vệ có mất mũi tên và mất dấu không? Dùng cung/nỏ hay súng TACZ để thể hiện?",
+    "context": "Mục 432 đã rõ hai mũi tên, dấu chờ một ngày và ngoại lệ phản đòn; không hỏi lại những luật đó.",
+    "contextLabel": "Nguồn và ngữ cảnh",
+    "answer": ""
+  },
+  {
+    "id": "C04",
+    "priority": "P1",
+    "question": "Pumpkin Oracle xử lý nhánh 20% biết cả ba ra sao khi cả ba cùng phe?",
+    "context": "Mục 592 đặt điều kiện cho nhánh đó nhưng chưa nêu phân phối thay thế.",
+    "contextLabel": "Nguồn và ngữ cảnh",
+    "answer": ""
+  },
+  {
+    "id": "C05",
+    "priority": "P1",
+    "question": "Sheriff chọn nghi phạm vô tội thứ hai từ ai? Journalist dùng hàng/cột tại lúc giết hay lúc điều tra, chọn hàng hay cột theo cách nào?",
+    "context": "Sheriff 642; Journalist 2685.",
+    "contextLabel": "Nguồn và ngữ cảnh",
+    "answer": ""
+  },
+  {
+    "id": "C06",
+    "priority": "P1",
+    "question": "Prayer nhận khả năng bao nhiêu lượt, chọn loại nào khi mục tiêu có nhiều khả năng, có thể đổi mục tiêu trước khi chết không?",
+    "context": "Mục 750.",
+    "contextLabel": "Nguồn và ngữ cảnh",
+    "answer": ""
+  },
+  {
+    "id": "C07",
+    "priority": "P1",
+    "question": "Khi nhiều Seer Apprentice và nhiều vai thông tin chết/hồi sinh, chọn người hoàn vai theo tiêu chí nào?",
+    "context": "Mục 138 có quy tắc thừa kế nhưng chưa chỉ định cách chọn trong các trường hợp đồng hạng.",
+    "contextLabel": "Nguồn và ngữ cảnh",
+    "answer": ""
+  },
+  {
+    "id": "C08",
+    "priority": "P1",
+    "question": "“Cùng lúc” của nhiều Conjuror lấy chung tài nguyên được xác định theo cùng tick, cùng pha hay cùng lượt xử lý? Ritualist/Wolf Summoner có bao nhiêu lượt?",
+    "context": "Mục 795/830/1902; cần tránh kết quả do độ trễ mạng.",
+    "contextLabel": "Nguồn và ngữ cảnh",
+    "answer": ""
+  },
+  {
+    "id": "C09",
+    "priority": "P1",
+    "question": "Khi nhiều nguồn hồi sinh cùng nhắm một người, ai tiêu hao lượt? Hồi sinh thất bại do offline có hoàn lượt không?",
+    "context": "Medium/Ritualist/Exorcist/Wolf Summoner và người chơi mất kết nối.",
+    "contextLabel": "Nguồn và ngữ cảnh",
+    "answer": ""
+  },
+  {
+    "id": "C10",
+    "priority": "P1",
+    "question": "Nhiều bảo vệ cùng cứu một người: thứ tự tiêu hao, chọn người nhận đòn và chọn Ghost Lady bị ràng buộc?",
+    "context": "Có vài thứ tự đã rõ: Beast Hunter trước Trapper; Admirer cuối; cần hoàn thiện bảng còn lại.",
+    "contextLabel": "Nguồn và ngữ cảnh",
+    "answer": ""
+  },
+  {
+    "id": "C11",
+    "priority": "P1",
+    "question": "Watchdog còn một lượt nhưng cả hai chó cùng cứu trong một đêm thì xử lý thế nào? Chặn những loại tấn công/độc/cải đạo nào? Locksmith chặn đòn làm vỡ khóa hay đòn đó vẫn gây chết?",
+    "context": "Mục 2659/2676.",
+    "contextLabel": "Nguồn và ngữ cảnh",
+    "answer": ""
+  },
+  {
+    "id": "C12",
+    "priority": "P1",
+    "question": "Khi đồng thời có Judge, Final March, Pacifist, Revolt, Rainmaker và bảo vệ treo cổ thì thứ tự nào? Chọn hai người của Final March thế nào nếu hạng hai hòa?",
+    "context": "Các vai trò thay đổi kết quả bỏ phiếu.",
+    "contextLabel": "Nguồn và ngữ cảnh",
+    "answer": ""
+  },
+  {
+    "id": "C13",
+    "priority": "P1",
+    "question": "Chọn sói yếu nhất khi có nhiều sói cùng bậc theo số ghế hay ngẫu nhiên?",
+    "context": "Beast Hunter/Trapper đã có bảng sức mạnh; Sheriff/Tough Guy có ngoại lệ liên quan sói bị giam.",
+    "contextLabel": "Nguồn và ngữ cảnh",
+    "answer": ""
+  },
+  {
+    "id": "C14",
+    "priority": "P1",
+    "question": "Phần kiểm tra tự động của Wolf Seer ở 6 giây cuối áp dụng thế nào khi admin đặt lượt dưới 6 giây?",
+    "context": "Mục 1945; cần gắn với mô hình thời gian A03.",
+    "contextLabel": "Nguồn và ngữ cảnh",
+    "answer": ""
+  },
+  {
+    "id": "C15",
+    "priority": "P1",
+    "question": "Pumpkin Dealer đã cho một viên đạn thì lần trúng phần thưởng đạn tiếp theo đổi thành gì?",
+    "context": "Mục 1145 cấm nhận thêm khi chưa dùng viên cũ nhưng không nêu cách xử lý xác suất.",
+    "contextLabel": "Nguồn và ngữ cảnh",
+    "answer": ""
+  },
+  {
+    "id": "C16",
+    "priority": "P1",
+    "question": "Có cần bổ sung mục Bandit riêng trước khi triển khai nhánh này không? Những vai mới chỉ được dẫn chiếu sẽ tạm không xuất hiện trong lựa chọn/chuyển vai?",
+    "context": "Accomplice có mô tả nhưng chưa đủ toàn bộ vòng đời Bandit; đề xuất chờ bổ sung, không tự suy luật.",
+    "contextLabel": "Nguồn và ngữ cảnh",
+    "answer": ""
+  },
+  {
+    "id": "C17",
+    "priority": "P0",
+    "question": "Cho nhiều vai phe 3 cùng loại thì thắng độc lập hay chung nhóm? Sect Leader có phải loại các sát thủ phe 3 còn sống mới thắng không? Instigator cần trạng thái cuối ván nào?",
+    "context": "Mục 2498/2557 cùng cấu hình số người tùy chỉnh; mô tả điều kiện thắng chưa bao phủ mọi tổ hợp.",
+    "contextLabel": "Nguồn và ngữ cảnh",
+    "answer": ""
+  },
+  {
+    "id": "C18",
+    "priority": "P1",
+    "question": "Bomber chọn ba ô tùy ý hay một cụm ô liền nhau? Storm Wolf đổi vị trí thì bom đi theo ô hay người?",
+    "context": "Bomber 2290 có ô trống; Storm Wolf 1621 xáo vị trí.",
+    "contextLabel": "Nguồn và ngữ cảnh",
+    "answer": ""
+  },
+  {
+    "id": "C19",
+    "priority": "P1",
+    "question": "Dracula giả chết dùng vị trí quan sát, thân thể và thao tác kỹ năng như thế nào để không lộ undead? Việc nhắm người chết chỉ dành các kỹ năng được tài liệu cho phép?",
+    "context": "Mục 2442; không thể dùng một cờ sống/chết duy nhất cho mọi hệ thống.",
+    "contextLabel": "Nguồn và ngữ cảnh",
+    "answer": ""
+  },
+  {
+    "id": "C20",
+    "priority": "P1",
+    "question": "Khi hai luật chết dây chuyền tạo vòng, hoặc nhiều nguồn cùng giết một người, ghi nguyên nhân và kẻ giết nào cho từng vai điều tra?",
+    "context": "Lovers, Sect, Evil Cupid, Avenger, Ghost Lady, Spirit Seer, Sheriff, Exorcist. Đề xuất lưu mọi đòn nhưng chỉ chuyển trạng thái chết một lần cho mỗi đời.",
+    "contextLabel": "Nguồn và ngữ cảnh",
+    "answer": ""
+  },
+  {
+    "id": "D01",
+    "priority": "P0",
+    "question": "Ban ngày được tự đi lại trong đấu trường hay ngồi cố định? Người chơi tự về giường hay hết thời gian chuẩn bị sẽ được đưa về?",
+    "context": "Khu vực giới hạn; có thời gian về giường rồi tự đưa về nếu chưa đến.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "D02",
+    "priority": "P0",
+    "question": "Ai được xem/nghe từng hoạt cảnh: người thực hiện, mục tiêu, người chết, toàn bộ trận? NPC dùng skin người hành động hay nhân vật đại diện?",
+    "context": "Lập bảng cho từng kỹ năng; mặc định NPC đại diện ẩn danh khi luật chưa cho lộ vai.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "D03",
+    "priority": "P1",
+    "question": "Mục tiêu có được biết có người đến thăm/bảo vệ ngay lúc diễn cảnh không, nếu luật chỉ cho biết khi bị tấn công?",
+    "context": "Chỉ hiển thị đúng thời điểm luật cho biết; không gửi cảnh bí mật đến mọi client.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "D04",
+    "priority": "P1",
+    "question": "Góc nhìn nằm giường có được xoay hoặc dùng camera hoạt cảnh? Có thể bỏ qua hoạt cảnh không?",
+    "context": "Thử góc nhìn tại giường trước; hoạt cảnh không thay đổi kết quả hay lấy mất thời gian quyết định.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "D05",
+    "priority": "P0",
+    "question": "Súng cần ngắm/bắn thật và có thể trượt, hay chọn mục tiêu rồi diễn phát bắn?",
+    "context": "Chọn mục tiêu theo luật, TACZ diễn phát bắn; bắn thật cần chốt thêm trượt, vật cản và tiêu hao.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "D06",
+    "priority": "P0",
+    "question": "Các kênh ẩn danh và kênh đặc biệt có dùng voice không: ngục, Medium, Soulbinder, Zombie, Bandit, Lovers, Instigator?",
+    "context": "Chat chữ riêng cho kênh ẩn danh; voice chỉ mở khi được duyệt. Luật khóa voice người sống ban đêm vẫn là mặc định.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "D07",
+    "priority": "P0",
+    "question": "Ghost Wolf đã chết được nói với sói sống theo vai trò: chỉ chat chữ hay ngoại lệ voice? Người chết thường được nghe người sống ở mức nào?",
+    "context": "Tách quyền đọc, gửi, nghe và nói; không cho người chết thường truyền thông tin sang sói qua kênh Ghost Wolf.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "D08",
+    "priority": "P1",
+    "question": "Câm/choáng/glitch/ngập làng có chặn voice không? Cách chuyển giới hạn “3 chữ cái” của Swamp Wolf sang voice?",
+    "context": "Khóa voice khi bị cấm nói; riêng ngập làng dùng chat chữ giới hạn để luật có ý nghĩa.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "D09",
+    "priority": "P1",
+    "question": "Dùng bảng người chơi theo lưới mấy cột, số ghế ổn định hay đổi theo Storm Wolf? Có đổi vị trí giường vật lý không?",
+    "context": "Giữ UUID và giường ổn định; tách vị trí lưới hiển thị khỏi người chơi. Journalist/Bomber cần luật gắn ô được duyệt.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "D10",
+    "priority": "P1",
+    "question": "Người chết được bay quan sát, thấy vai trò thật và hoạt cảnh bí mật tới mức nào, khi họ có thể được hồi sinh?",
+    "context": "Giới hạn thông tin theo vai trò và khả năng hồi sinh; không tự mở toàn bộ vai trò sau chết.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "D11",
+    "priority": "P1",
+    "question": "Có cho PvP, phá/đặt block, dùng đồ ngoài kỹ năng, sát thương môi trường và ra khỏi đấu trường không?",
+    "context": "Trong trận chỉ cho hành động hợp lệ; sát thương thường không tự trở thành kết quả kỹ năng.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "D12",
+    "priority": "P2",
+    "question": "Giao diện ưu tiên tiếng Việt hay song ngữ; dùng số ghế, tên Minecraft hay tên tùy chỉnh? Bossbar công khai cần hiện gì khi vai bí mật đang hành động?",
+    "context": "Tiếng Việt kèm tên vai tiếng Anh; timer công khai chỉ hiện pha chung, timer vai chỉ gửi người có quyền.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  },
+  {
+    "id": "D13",
+    "priority": "P1",
+    "question": "Admin có được xem vai bí mật khi đang tham gia trận, và cần các lệnh can thiệp nào?",
+    "context": "Tách quản trò quan sát khỏi người chơi; ghi nhật ký thao tác đổi pha/kết thúc/đổi trạng thái.",
+    "contextLabel": "Đề xuất chưa duyệt",
+    "answer": ""
+  }
+]</script>
+<script>
+'use strict';
+const questions=JSON.parse(document.getElementById('question-data').textContent);
+const proposals=[['P01','Một đấu trường, một trận ở mốc đầu'],['P02','Đêm chung, hành động tức thì và cuối đêm'],['P03','NPC diễn cảnh, quyền xem theo kỹ năng'],['P04','Chọn mục tiêu rồi diễn phát bắn TACZ'],['P05','Chat chữ cho kênh cần ẩn danh'],['P06','Giữ luật hiện hành, không tái tạo lỗi game gốc']];
+const key='mc-werewolf-plan-v1';let draft={answers:{},decisions:{},note:''};let storageAvailable=true;
+try{const saved=JSON.parse(localStorage.getItem(key)||'null');if(saved&&typeof saved==='object'){draft.answers=saved.answers||{};draft.decisions=saved.decisions||{};draft.note=typeof saved.note==='string'?saved.note:'';}}catch(e){storageAvailable=false;}
+const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
+for(const [id,title] of proposals){const box=el('div',undefined,'decision');const label=el('label',id+' · '+title);label.htmlFor=id;const select=el('select');select.id=id;for(const value of ['Chưa quyết định','Đồng ý phương án đề xuất','Muốn điều chỉnh — xem ghi chú','Để sau']){const o=el('option',value);o.value=value;select.append(o);}select.value=draft.decisions[id]||'Chưa quyết định';select.addEventListener('change',()=>{draft.decisions[id]=select.value;persist();});box.append(label,select);document.getElementById('decision-list').append(box);}
+document.getElementById('general-note').value=draft.note;
+document.getElementById('general-note').addEventListener('input',e=>{draft.note=e.target.value;persist();});
+const nodes=[];
+for(const q of questions){const d=el('details');d.id=q.id;const s=el('summary');s.append(el('span',q.id+' · '+q.priority,'pill'),document.createTextNode(q.question));const body=el('div',undefined,'question-body');body.append(el('p',q.contextLabel+': '+q.context));const label=el('label','Trả lời '+q.id);label.htmlFor='answer-'+q.id;const input=el('textarea');input.id='answer-'+q.id;input.placeholder='Chưa quyết định. Có thể trả lời hoặc ghi “Để sau”.';input.value=draft.answers[q.id]||q.answer||'';input.addEventListener('input',()=>{draft.answers[q.id]=input.value;persist();});body.append(label,input);d.append(s,body);document.getElementById('question-list').append(d);nodes.push({q,node:d});}
+function normalized(v){return v.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').toLowerCase();}
+function filter(){const query=normalized(document.getElementById('search').value),p=document.getElementById('priority').value,g=document.getElementById('group').value;let count=0;for(const {q,node} of nodes){const show=(!p||q.priority===p)&&(!g||q.id.startsWith(g))&&normalized(q.id+' '+q.question+' '+q.context).includes(query);node.hidden=!show;if(show)count++;}document.getElementById('result-count').textContent=count+' / '+questions.length+' câu hỏi'+(count===0?' — thử từ khóa hoặc bộ lọc khác.':'');}
+for(const id of ['search','priority','group'])document.getElementById(id).addEventListener('input',filter);filter();
+function persist(){try{localStorage.setItem(key,JSON.stringify(draft));storageAvailable=true;document.getElementById('save-status').textContent='Đã lưu nháp trên trình duyệt này. Chưa gửi hoặc áp dụng quyết định.';}catch(e){storageAvailable=false;document.getElementById('save-status').textContent='Trình duyệt không cho lưu nháp. Hãy tải câu trả lời .md trước khi đóng trang.';}}
+if(!storageAvailable)document.getElementById('save-status').textContent='Không đọc được lưu trữ trình duyệt. Bạn vẫn có thể nhập và tải câu trả lời .md.';
+document.getElementById('save').addEventListener('click',persist);
+document.getElementById('export').addEventListener('click',()=>{const lines=['# Ý kiến về kế hoạch mod Ma Sói','','Bản kế hoạch: 27/10/2026. Đây là câu trả lời xuất từ HTML, chưa tự áp dụng vào mã nguồn.','','## Phương án đề xuất',''];for(const [id,title] of proposals)lines.push('- **'+id+' — '+title+':** '+(draft.decisions[id]||'Chưa quyết định'));lines.push('','## Ghi chú chung','',draft.note||'(Chưa có)','','## Câu hỏi chi tiết','');for(const q of questions)lines.push('### '+q.id+' · '+q.priority,'',q.question,'','**Trả lời:** '+(draft.answers[q.id]||q.answer||'(Chưa trả lời)'),'');const blob=new Blob(['\ufeff'+lines.join('\n')],{type:'text/markdown;charset=utf-8'});const url=URL.createObjectURL(blob);const a=el('a');a.href=url;a.download='TRA_LOI_KE_HOACH_MA_SOI.md';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);document.getElementById('save-status').textContent='Đã yêu cầu tải file .md. Đưa file vào dự án hoặc gửi lại để mình đọc quyết định.';});
+document.getElementById('print').addEventListener('click',()=>{for(const {node} of nodes){node.hidden=false;node.open=true;}window.print();});
+window.addEventListener('afterprint',filter);
+</script>
+</body>
+</html>
